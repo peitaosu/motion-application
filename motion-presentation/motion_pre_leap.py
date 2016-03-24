@@ -7,6 +7,9 @@ sys.path.insert(0, os.path.abspath(os.path.join(src_dir, arch_dir)))
 sys.path.insert(0, os.path.abspath(os.path.join(src_dir, leap_dir)))
 import Leap
 
+with open(os.getcwd()+'/config.json', 'r') as config_file:
+    config = json.load(config_file)
+
 class Listener(Leap.Listener):
     def on_init(self, controller):
         print str(datetime.datetime.now())+" Initialized"
@@ -27,26 +30,23 @@ class Listener(Leap.Listener):
         #output
         print str(datetime.datetime.now())+" x: "+str(hand_speed.x)+" y: "+str(hand_speed.y)+" z: "+str(hand_speed.z)
 
-        #setup threshold
-        threshold = 1500
-
         #output while it over threshold
-        if hand_speed.x > threshold:
+        if hand_speed.x > config["threshold"]["x"]:
             print str(datetime.datetime.now())+" right over threshold:"+str(hand_speed.x)
-        elif hand_speed.x < -threshold:
+        elif hand_speed.x < config["threshold"]["-x"]:
             print str(datetime.datetime.now())+" left over threshold:"+str(hand_speed.x)
         
-        if hand_speed.y > threshold:
+        if hand_speed.y > config["threshold"]["y"]:
             print str(datetime.datetime.now())+" up over threshold:"+str(hand_speed.y)
-        elif hand_speed.y < -threshold:
+        elif hand_speed.y < config["threshold"]["-y"]:
             print str(datetime.datetime.now())+" down over threshold:"+str(hand_speed.y)
 
-        if hand_speed.z > threshold:
+        if hand_speed.z > config["threshold"]["z"]:
             print str(datetime.datetime.now())+" front over threshold:"+str(hand_speed.z)
-        elif hand_speed.z < -threshold:
+        elif hand_speed.z < config["threshold"]["-z"]:
             print str(datetime.datetime.now())+" back over threshold:"+str(hand_speed.z)
 
-        time.sleep(0.5)
+        time.sleep(config["sleep"])
 
 def main():
     listener = Listener()
