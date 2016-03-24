@@ -1,0 +1,26 @@
+{
+    "left": {
+        "key_sim": "L",
+        "mouse_sim": ""
+    },
+    "right": {
+        "key_sim": "R",
+        "mouse_sim": ""
+    },
+    "up": {
+        "key_sim": "U",
+        "mouse_sim": ""
+    },
+    "down": {
+        "key_sim": "D",
+        "mouse_sim": ""
+    },
+    "front": {
+        "key_sim": "F",
+        "mouse_sim": ""
+    },
+    "back": {
+        "key_sim": "B",
+        "mouse_sim": ""
+    }
+}

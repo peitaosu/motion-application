@@ -3,12 +3,17 @@ import os, sys, time, inspect, datetime, json
 src_dir = os.path.dirname(inspect.getfile(inspect.currentframe()))
 arch_dir = '../../motion-leap/lib/x64' if sys.maxsize > 2 ** 32 else '../../motion-leap/lib/x86'
 leap_dir = '../../motion-leap/lib'
+module_dir = '../lib'
 sys.path.insert(0, os.path.abspath(os.path.join(src_dir, arch_dir)))
 sys.path.insert(0, os.path.abspath(os.path.join(src_dir, leap_dir)))
+sys.path.insert(0, os.path.abspath(os.path.join(src_dir, module_dir)))
 import Leap
+import simulation.kbsim.keyboard_simulation as key_sim
 
 with open(os.getcwd()+'/config.json', 'r') as config_file:
     config = json.load(config_file)
+with open(os.getcwd()+'/action_binding.json', 'r') as action_file:
+    action = json.load(action_file)
 
 class Listener(Leap.Listener):
     def on_init(self, controller):
@@ -32,18 +37,24 @@ class Listener(Leap.Listener):
 
         #output while it over threshold
         if hand_speed.x > config["threshold"]["x"]:
+            key_sim.TypeKey(action["right"]["key_sim"])
             print str(datetime.datetime.now())+" right over threshold:"+str(hand_speed.x)
         elif hand_speed.x < config["threshold"]["-x"]:
+            key_sim.TypeKey(action["left"]["key_sim"])
             print str(datetime.datetime.now())+" left over threshold:"+str(hand_speed.x)
         
         if hand_speed.y > config["threshold"]["y"]:
+            key_sim.TypeKey(action["up"]["key_sim"])
             print str(datetime.datetime.now())+" up over threshold:"+str(hand_speed.y)
         elif hand_speed.y < config["threshold"]["-y"]:
+            key_sim.TypeKey(action["down"]["key_sim"])
             print str(datetime.datetime.now())+" down over threshold:"+str(hand_speed.y)
 
         if hand_speed.z > config["threshold"]["z"]:
+            key_sim.TypeKey(action["front"]["key_sim"])
             print str(datetime.datetime.now())+" front over threshold:"+str(hand_speed.z)
         elif hand_speed.z < config["threshold"]["-z"]:
+            key_sim.TypeKey(action["back"]["key_sim"])
             print str(datetime.datetime.now())+" back over threshold:"+str(hand_speed.z)
 
         time.sleep(config["sleep"])
