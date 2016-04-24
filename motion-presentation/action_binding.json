@@ -1,26 +1,26 @@
 {
     "left": {
-        "key_sim": "l",
+        "key_sim": "left",
         "mouse_sim": ""
     },
     "right": {
-        "key_sim": "r",
+        "key_sim": "right",
         "mouse_sim": ""
     },
     "up": {
-        "key_sim": "u",
+        "key_sim": "up",
         "mouse_sim": ""
     },
     "down": {
-        "key_sim": "d",
+        "key_sim": "down",
         "mouse_sim": ""
     },
     "front": {
-        "key_sim": "f",
+        "key_sim": "F5",
         "mouse_sim": ""
     },
     "back": {
-        "key_sim": "b",
+        "key_sim": "esc",
         "mouse_sim": ""
     }
 }
